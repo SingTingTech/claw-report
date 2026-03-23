@@ -2,6 +2,9 @@
 -- ClawReport V1: 初始化建表脚本
 -- ================================================
 
+USE reporthub;
+SET NAMES utf8mb4;
+
 -- 用户表
 CREATE TABLE IF NOT EXISTS rh_user (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,

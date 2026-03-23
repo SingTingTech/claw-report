@@ -1,3 +1,6 @@
+USE reporthub;
+SET NAMES utf8mb4;
+
 -- 数据字典表（存储表和字段的注释/说明）
 CREATE TABLE IF NOT EXISTS rh_data_dictionary (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,

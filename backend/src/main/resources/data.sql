@@ -4,6 +4,7 @@
 -- ================================================
 
 USE reporthub;
+SET NAMES utf8mb4;
 
 -- 创建超级管理员用户 (密码: admin123)
 -- BCrypt hash for 'admin123': $2a$10$uSOE/qomCgwmurjFcViZPuaoCG8OTdafP9Wcvf3B6N2w6nGjGJ9Ae

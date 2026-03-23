@@ -301,7 +301,7 @@ CREATE TABLE IF NOT EXISTS rh_report_share (
 -- 初始化管理员账户 (密码: admin123)
 -- ----------------------------
 INSERT INTO rh_user (username, password, real_name, email, status) VALUES
-('admin', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iAt6Z5EH', '系统管理员', 'admin@reporthub.com', 1);
+('admin', '$2a$10$zHp/eZ6Jr7whwtD4alEfkeFUNiUZJip9deiA2l/Uwe6oi9DJOnXtW', '系统管理员', 'admin@reporthub.com', 1);
 
 -- 管理员分配 ADMIN 角色
 INSERT INTO rh_user_role (user_id, role_id) 

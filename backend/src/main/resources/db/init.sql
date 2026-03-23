@@ -4,6 +4,7 @@
 CREATE DATABASE IF NOT EXISTS reporthub DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 USE reporthub;
+SET NAMES utf8mb4;
 
 -- ----------------------------
 -- 1. 用户表

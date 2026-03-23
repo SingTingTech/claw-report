@@ -153,26 +153,26 @@ INSERT INTO rh_data_source_mask (ds_id, field_name, mask_type, mask_rule) VALUES
 (1, 'password', 'encrypt', 'AES'),
 (1, 'email', 'mask', '****');
 
--- 创建数据字典表
+-- 创建数据字典表（用于存储数据源的表/列元数据，如字段注释、枚举配置）
 CREATE TABLE IF NOT EXISTS rh_data_dictionary (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    dict_name VARCHAR(50) NOT NULL COMMENT '字典名称',
-    dict_code VARCHAR(50) NOT NULL COMMENT '字典代码',
-    dict_type VARCHAR(20) DEFAULT 'system' COMMENT '字典类型',
-    dict_value VARCHAR(100) COMMENT '字典值',
-    dict_label VARCHAR(100) COMMENT '字典标签',
-    sort_order INT DEFAULT 0 COMMENT '排序',
-    description VARCHAR(200) COMMENT '描述',
+    data_source_id BIGINT NOT NULL COMMENT '数据源ID',
+    table_name VARCHAR(100) NOT NULL COMMENT '表名',
+    column_name VARCHAR(100) NOT NULL COMMENT '列名',
+    table_comment VARCHAR(500) COMMENT '表注释',
+    column_comment VARCHAR(500) COMMENT '列注释',
+    column_type VARCHAR(100) COMMENT '列类型',
+    nullable VARCHAR(10) COMMENT '是否可空',
+    default_value VARCHAR(200) COMMENT '默认值',
+    is_primary_key TINYINT DEFAULT 0 COMMENT '是否主键',
+    saved_comment VARCHAR(500) COMMENT '用户保存的备注',
+    enum_config TEXT COMMENT '枚举配置，格式：1=正常,0=禁用',
+    deleted TINYINT DEFAULT 0,
     create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_ds_table (data_source_id, table_name),
+    INDEX idx_ds_table_column (data_source_id, table_name, column_name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='数据字典表';
-
--- 创建数据字典数据
-INSERT INTO rh_data_dictionary (dict_name, dict_code, dict_type, dict_value, dict_label, sort_order, description) VALUES
-('用户状态', 'user_status', 'system', '1', '正常', 1, '系统内置'),
-('用户状态', 'user_status', 'system', '0', '禁用', 0, '系统内置'),
-('报表状态', 'report_status', 'system', '1', '启用', 1, '系统内置'),
-('报表状态', 'report_status', 'system', '0', '禁用', 0, '系统内置');
 
 -- 清理测试查询历史
 DELETE FROM rh_query_history WHERE 1=1;

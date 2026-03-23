@@ -7,7 +7,7 @@ spring:
     name: report-hub
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://127.0.0.1:3306/clawreport?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://127.0.0.1:3306/reporthub?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
     username: ${SPRING_DATASOURCE_USERNAME:clawreport}
     password: ${SPRING_DATASOURCE_PASSWORD:ReportHub@2026}
     type: com.alibaba.druid.pool.DruidDataSource
@@ -37,7 +37,7 @@ mybatis-plus:
       logic-not-delete-value: 0
 
 jwt:
-  secret: ${JWT_SECRET:}
+  secret: ${JWT_SECRET: ClawReportSecretKey2026MustBeAtLeast256BitsLong!}
   expiration: ${JWT_EXPIRATION:86400000}
 
 app:

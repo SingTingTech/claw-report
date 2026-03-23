@@ -1,0 +1,9 @@
+node_modules/
+dist/
+target/
+*.log
+*.pid
+.env
+.DS_Store
+*.class
+*.jar

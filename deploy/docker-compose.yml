@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: reporthub-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: Root@2026
+      MYSQL_DATABASE: reporthub
+      MYSQL_USER: reporthub
+      MYSQL_PASSWORD: ReportHub@2026
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ../backend/src/main/resources/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    image: reporthub-backend:latest
+    container_name: reporthub-backend
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      # 生产环境请修改这些密钥！
+      JWT_SECRET: ${JWT_SECRET:-default-jwt-secret-change-in-production}
+      PASSWORD_ENCRYPT_KEY: ${PASSWORD_ENCRYPT_KEY:-default-encrypt-key-change-in-production}
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/reporthub?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: reporthub
+      SPRING_DATASOURCE_PASSWORD: ReportHub@2026
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:3000}
+      MYBATIS_LOG_IMPL: ""
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    image: reporthub-frontend:latest
+    container_name: reporthub-frontend
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:

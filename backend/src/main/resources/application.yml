@@ -1,13 +1,20 @@
 server:
   address: ${SERVER_ADDRESS:0.0.0.0}
   port: ${SERVER_PORT:8080}
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+      force-request: true
+      force-response: true
 
 spring:
   application:
     name: report-hub
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://127.0.0.1:3306/reporthub?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://127.0.0.1:3306/reporthub?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
     username: ${SPRING_DATASOURCE_USERNAME:clawreport}
     password: ${SPRING_DATASOURCE_PASSWORD:ReportHub@2026}
     type: com.alibaba.druid.pool.DruidDataSource

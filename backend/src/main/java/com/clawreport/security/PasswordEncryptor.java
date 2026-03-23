@@ -39,7 +39,8 @@ public class PasswordEncryptor {
             byte[] decrypted = cipher.doFinal(Base64.getDecoder().decode(encryptedPassword));
             return new String(decrypted, StandardCharsets.UTF_8);
         } catch (Exception e) {
-            throw new RuntimeException("解密失败", e);
+            // 解密失败时返回原值（可能是明文密码）
+            return encryptedPassword;
         }
     }
 

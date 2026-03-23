@@ -11,7 +11,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.reporthub</groupId>
+    <groupId>com.clawreport</groupId>
     <artifactId>report-hub-backend</artifactId>
     <version>1.0.0</version>
     <name>ReportHub Backend</name>

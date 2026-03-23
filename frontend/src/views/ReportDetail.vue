@@ -227,7 +227,7 @@ async function fetchReport() {
 async function loadEnumConfigs() {
   if (!report.value?.dataSourceId) return
   try {
-    const res = await api.get(`/datasource/${report.value.dataSourceId}/dictionary?database=${report.value.databaseName || 'reporthub'}`)
+    const res = await api.get(`/datasource/${report.value.dataSourceId}/dictionary?database=${report.value.databaseName || 'clawreport'}`)
     if (res.code === 200 && res.data) {
       const configs = {}
       res.data.forEach(table => {

@@ -21,7 +21,7 @@
 ```
 report-hub/
 ├── backend/               # SpringBoot 后端
-│   ├── src/main/java/com/reporthub/
+│   ├── src/main/java/com/clawreport/
 │   │   ├── controller/    # REST API
 │   │   ├── service/      # 业务逻辑
 │   │   ├── mapper/        # 数据访问

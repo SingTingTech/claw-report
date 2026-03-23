@@ -3,12 +3,12 @@ version: '3.8'
 services:
   mysql:
     image: mysql:8.0
-    container_name: reporthub-mysql
+    container_name: clawreport-mysql
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: Root@2026
-      MYSQL_DATABASE: reporthub
-      MYSQL_USER: reporthub
+      MYSQL_DATABASE: clawreport
+      MYSQL_USER: clawreport
       MYSQL_PASSWORD: ReportHub@2026
     ports:
       - "127.0.0.1:3306:3306"
@@ -26,8 +26,8 @@ services:
     build:
       context: ../backend
       dockerfile: Dockerfile
-    image: reporthub-backend:latest
-    container_name: reporthub-backend
+    image: clawreport-backend:latest
+    container_name: clawreport-backend
     restart: unless-stopped
     ports:
       - "127.0.0.1:8080:8080"
@@ -35,8 +35,8 @@ services:
       # 生产环境请修改这些密钥！
       JWT_SECRET: ${JWT_SECRET:-default-jwt-secret-change-in-production}
       PASSWORD_ENCRYPT_KEY: ${PASSWORD_ENCRYPT_KEY:-default-encrypt-key-change-in-production}
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/reporthub?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: reporthub
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/clawreport?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: clawreport
       SPRING_DATASOURCE_PASSWORD: ReportHub@2026
       SPRING_DATA_REDIS_HOST: redis
       SPRING_DATA_REDIS_PORT: 6379
@@ -50,8 +50,8 @@ services:
     build:
       context: ../frontend
       dockerfile: Dockerfile
-    image: reporthub-frontend:latest
-    container_name: reporthub-frontend
+    image: clawreport-frontend:latest
+    container_name: clawreport-frontend
     restart: unless-stopped
     ports:
       - "127.0.0.1:3000:3000"

@@ -22,12 +22,12 @@ public class DataSourceAdapterFactory {
     @PostConstruct
     public void init() {
         for (DataSourceAdapter adapter : adapters.values()) {
-            adapterMap.put(adapter.getType(), adapter);
+            adapterMap.put(adapter.getType().toUpperCase(), adapter);
         }
     }
 
     public DataSourceAdapter getAdapter(String type) {
-        DataSourceAdapter adapter = adapterMap.get(type);
+        DataSourceAdapter adapter = adapterMap.get(type.toUpperCase());
         if (adapter == null) {
             throw new IllegalArgumentException("不支持的数据源类型: " + type);
         }
@@ -35,7 +35,7 @@ public class DataSourceAdapterFactory {
     }
 
     public boolean isSupported(String type) {
-        return adapterMap.containsKey(type);
+        return adapterMap.containsKey(type.toUpperCase());
     }
 
     public String[] getSupportedTypes() {
